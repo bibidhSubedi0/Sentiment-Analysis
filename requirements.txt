@@ -1,2 +1,7 @@
 praw~=7.8.1
 python-dotenv~=1.0.1
+numpy~=2.2.3
+pandas~=2.2.3
+seaborn~=0.13.2
+matplotlib~=3.10.0
+scikit-learn~=1.6.1
