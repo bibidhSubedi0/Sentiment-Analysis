@@ -82,8 +82,9 @@ class RedditScraper:
 
         filename = f"data/raw/{subreddit_name}_{sort_by.value}_{time_filter.value}_{datetime.now().strftime('%Y%m%d')}.json"
 
-        with open(filename, 'w') as file:
+        with open(filename, "w", encoding="utf-8") as file:
             json.dump(posts_data, file, indent=2, ensure_ascii=False)
+
 
         logging.info(f"Saved {len(posts_data)} posts to {filename}")
         return filename
