@@ -1,3 +1,13 @@
 __pycache__/
-.vscode
-venv
+.vscode/
+.idea/
+.venv/
+venv/
+.env
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+data/raw/*
+!data/raw/reddit_posts_raw.json
