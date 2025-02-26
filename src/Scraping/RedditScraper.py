@@ -1,4 +1,4 @@
-import praw
+import praw  # type: ignore
 import json
 import logging
 from datetime import datetime
@@ -12,7 +12,9 @@ logging.basicConfig(
 
 
 class RedditScraper:
+    """RedditScraper class to fetch posts from Reddit using PRAW"""
     class TimeFilter(Enum):
+        """Enum to constrain time filtering"""
         ALL = 'all'
         DAY = 'day'
         HOUR = 'hour'
@@ -21,6 +23,7 @@ class RedditScraper:
         YEAR = 'year'
 
     class SortBy(Enum):
+        """Enum to constrain sorting"""
         HOT = 'hot'
         NEW = 'new'
         TOP = 'top'
@@ -61,7 +64,8 @@ class RedditScraper:
             logging.error(f"Processing error: {str(e)}")
             raise
 
-    def _save_posts(self, posts, subreddit_name, sort_by, time_filter):
+    @staticmethod
+    def _save_posts(posts, subreddit_name, sort_by, time_filter):
         """Internal method to handle data serialization"""
         posts_data = []
         for post in posts:
@@ -81,6 +85,7 @@ class RedditScraper:
             })
 
         filename = f"data/raw/{subreddit_name}_{sort_by.value}_{time_filter.value}_{datetime.now().strftime('%Y%m%d')}.json"
+
 
         with open(filename, "w", encoding="utf-8") as file:
             json.dump(posts_data, file, indent=2, ensure_ascii=False)

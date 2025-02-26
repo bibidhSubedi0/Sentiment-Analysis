@@ -1,6 +1,6 @@
 import src.test as test
 from src.Scraping.RedditScraper import RedditScraper
-from dotenv import dotenv_values
+from dotenv import dotenv_values  # type: ignore
 
 
 def main():
