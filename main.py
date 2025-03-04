@@ -9,8 +9,8 @@ def main():
                            user_agent=config["USER_AGENT"])
 
     # Fetch top 100 posts of all time
-    reddit.get_posts("facebook", sort_by=RedditScraper.SortBy.TOP, limit=100,
-                     time_filter=RedditScraper.TimeFilter.ALL)
+    reddit.get_posts("teslamotors", sort_by=RedditScraper.SortBy.TOP, limit=200,
+                     time_filter=RedditScraper.TimeFilter.MONTH)
 
     # # Fetch controversial posts from last month
     # reddit.get_posts("NepalStock",
