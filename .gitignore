@@ -11,3 +11,4 @@ venv/
 
 data/raw/*
 !data/raw/reddit_posts_raw.json
+src/EDA/corpora
