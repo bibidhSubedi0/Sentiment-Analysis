@@ -1,0 +1,342 @@
+[
+  {
+    "bigrams": [
+      [
+        "anyone",
+        "else"
+      ],
+      3
+    ],
+    "trigrams": [
+      [
+        "like",
+        "facebook",
+        "groups"
+      ],
+      2
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "facebook",
+        "without"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "take",
+        "screenshot",
+        "report"
+      ],
+      2
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "like",
+        "facebook"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "true",
+        "hardly",
+        "anyone"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "facebook",
+        "groups"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "hardly",
+        "anyone",
+        "uses"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "dont",
+        "want"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "anyone",
+        "uses",
+        "facebook"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "timeline",
+        "also"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "uses",
+        "facebook",
+        "anymore"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "whats",
+        "going"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "facebook",
+        "anymore",
+        "becoming"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "instagram",
+        "account"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "anymore",
+        "becoming",
+        "relic"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "account",
+        "facebook"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "becoming",
+        "relic",
+        "found"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "years",
+        "old"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "relic",
+        "found",
+        "customize"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "every",
+        "time"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "found",
+        "customize",
+        "see"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "updated",
+        "apps"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "customize",
+        "see",
+        "facebook"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "facebook",
+        "page"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "see",
+        "facebook",
+        "without"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "hateful",
+        "content"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "facebook",
+        "without",
+        "extra"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "dont",
+        "even"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "without",
+        "extra",
+        "crap"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "fake",
+        "account"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "extra",
+        "crap",
+        "perfect"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "right",
+        "wing"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "crap",
+        "perfect",
+        "go"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "keeps",
+        "posting"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "perfect",
+        "go",
+        "settings"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "pictures",
+        "baby"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "go",
+        "settings",
+        "click"
+      ],
+      1
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "democrat",
+        "hashtags"
+      ],
+      2
+    ],
+    "trigrams": [
+      [
+        "settings",
+        "click",
+        "feeds"
+      ],
+      1
+    ]
+  }
+]
