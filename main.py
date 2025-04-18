@@ -7,12 +7,18 @@ def main():
     config = dotenv_values(".env")
     scraper = RedditScraper(client_id=config["CLIENT_ID"], client_secret=config["CLIENT_SECRET"],
                            user_agent=config["USER_AGENT"])
-    data, filename = scraper.collect_posts("facebook", 5)
+    processed = True
+    data, filename = scraper.collect_posts("facebook", 100, processed=processed)
 
     # find count of posts
     count = 0
-    for month in data:
-        count += len(month['posts'])
+    if processed:
+        count = len(data)
+    else:
+        logging.info(f"Collected data from {len(data)} unique months")
+        for month in data:
+            count += len(month['posts'])
+
     logging.info(f"Collected {count} posts")
 
 

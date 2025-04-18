@@ -10,4 +10,3 @@ venv/
 *.log
 
 data/raw/*
-!data/raw/reddit_posts_raw.json
