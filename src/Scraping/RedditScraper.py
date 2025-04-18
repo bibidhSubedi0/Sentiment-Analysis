@@ -9,7 +9,8 @@ import sys
 from collections import defaultdict
 
 logging.basicConfig(
-    level=logging.DEBUG,  # Set to DEBUG for verbose logging
+    # level=logging.DEBUG,  # Set to DEBUG for verbose logging
+    level=logging.INFO,  # Set to INFO for verbose logging
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
@@ -65,12 +66,12 @@ class RedditScraper:
         except Exception as e:
             logging.error(f"Error fetching posts: {str(e)}")
             return []
-        logging.debug(f"Fetched {len(posts)} posts from r/{subreddit_name}")
+        logging.info(f"Fetched {len(posts)} posts from r/{subreddit_name}")
         return [self.__process_post(p) for p in posts] if processed else [self._transform_post(p) for p in posts]
 
 
     def __process_post(self, post):
-        logging.debug(f"Processing post {post.id}")
+        # logging.debug(f"Processing post {post.id}")
         return {
             'post_id': post.id,
             'created_utc': datetime.fromtimestamp(post.created_utc).isoformat(),
@@ -90,7 +91,7 @@ class RedditScraper:
         }
 
     def _transform_post(self, post) -> dict:
-        logging.debug(f"Transforming post {post.id}")
+        # logging.debug(f"Transforming post {post.id}")
         return {
             'title': post.title,
             'author': str(post.author),
@@ -114,7 +115,7 @@ class RedditScraper:
         return self.flair_list.index(flair_text) + 1
 
     def _fetch_top_comments(self, post_id: str, limit: int = 3):
-        logging.debug(f"Fetching top {limit} comments for post {post_id}")
+        logging.info(f"Fetching top {limit} comments for post {post_id}")
         submission = self.reddit.submission(id=post_id)
         submission.comment_sort = 'top'
         submission.comment_limit = limit
@@ -129,7 +130,7 @@ class RedditScraper:
                 'created_utc': datetime.fromtimestamp(comment.created_utc).isoformat()
             })
 
-        logging.debug(f"Fetched {len(top_comments)} top comments for post {post_id}")
+        logging.info(f"Fetched {len(top_comments)} top comments for post {post_id}")
         return top_comments
 
     def _format_output(self, collected_data, processed=False):
@@ -138,7 +139,7 @@ class RedditScraper:
             for month_data in collected_data.values():
                 for post in month_data['posts']:
                     filtered_post = {k: v for k, v in post.items()
-                                     if k not in ['post_id', 'created_utc']}
+                                    if k not in ['post_id', 'created_utc']}
                     flattened.append(filtered_post)
             return flattened
         else:
