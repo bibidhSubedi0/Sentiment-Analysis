@@ -7,7 +7,7 @@ def main():
     config = dotenv_values(".env")
     scraper = RedditScraper(client_id=config["CLIENT_ID"], client_secret=config["CLIENT_SECRET"],
                            user_agent=config["USER_AGENT"])
-    processed = True
+    processed = False
     data, filename = scraper.collect_posts("facebook", 100, processed=processed)
 
     # find count of posts
