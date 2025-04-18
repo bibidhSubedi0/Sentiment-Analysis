@@ -6,7 +6,8 @@ from dotenv import dotenv_values  # type: ignore
 def main():
     config = dotenv_values(".env")
     scraper = RedditScraper(client_id=config["CLIENT_ID"], client_secret=config["CLIENT_SECRET"],
-                           user_agent=config["USER_AGENT"])
+                            user_agent=config["USER_AGENT"], get_comments=False)
+    logging.info("Starting scraping...")
     processed = False
     data, filename = scraper.collect_posts("facebook", 100, processed=processed)
 
