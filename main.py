@@ -8,17 +8,16 @@ def main():
     scraper = RedditScraper(client_id=config["CLIENT_ID"], client_secret=config["CLIENT_SECRET"],
                             user_agent=config["USER_AGENT"], get_comments=False)
     logging.info("Starting scraping...")
-    processed = False
-    data, filename = scraper.collect_posts("facebook", 100, processed=processed)
+    data, filename = scraper.collect_posts("facebook", 100)
 
     # find count of posts
     count = 0
-    if processed:
-        count = len(data)
-    else:
-        logging.info(f"Collected data from {len(data)} unique months")
-        for month in data:
-            count += len(month['posts'])
+
+    count = len(data)
+    # else:
+    #     logging.info(f"Collected data from {len(data)} unique months")
+    #     for month in data:
+    #         count += len(month['posts'])
 
     logging.info(f"Collected {count} posts")
 
