@@ -85,7 +85,7 @@ class RedditScraper:
             'created_hour': datetime.fromtimestamp(post.created_utc).hour,
             'created_dayofweek': datetime.fromtimestamp(post.created_utc).weekday(),
             'combined_text': f"{post.title} {post.selftext}",
-            'cleaned_text': re.sub(r'\W+', ' ', re.sub(r'http\S+', '', f"{post.title} {post.selftext}")),
+            'cleaned_text': re.sub(r'\W+', ' ', re.sub(r'http\S+', '', f"{post.title} {post.selftext}".lower())),
             'flair_encoded': self._encode_flair(post.link_flair_text),
         }
 
