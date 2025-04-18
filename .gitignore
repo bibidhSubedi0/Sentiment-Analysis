@@ -10,3 +10,4 @@ venv/
 *.log
 
 data/raw/*
+src/EDA/corpora
