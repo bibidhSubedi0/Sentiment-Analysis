@@ -1,0 +1,82 @@
+[
+  {
+    "Word": "amd",
+    "Frequency": 56
+  },
+  {
+    "Word": "system",
+    "Frequency": 50
+  },
+  {
+    "Word": "uefi",
+    "Frequency": 42
+  },
+  {
+    "Word": "bios",
+    "Frequency": 34
+  },
+  {
+    "Word": "please",
+    "Frequency": 33
+  },
+  {
+    "Word": "power",
+    "Frequency": 31
+  },
+  {
+    "Word": "build",
+    "Frequency": 30
+  },
+  {
+    "Word": "pc",
+    "Frequency": 27
+  },
+  {
+    "Word": "using",
+    "Frequency": 27
+  },
+  {
+    "Word": "support",
+    "Frequency": 26
+  },
+  {
+    "Word": "update",
+    "Frequency": 26
+  },
+  {
+    "Word": "gpu",
+    "Frequency": 24
+  },
+  {
+    "Word": "use",
+    "Frequency": 24
+  },
+  {
+    "Word": "may",
+    "Frequency": 24
+  },
+  {
+    "Word": "windows",
+    "Frequency": 22
+  },
+  {
+    "Word": "cpu",
+    "Frequency": 21
+  },
+  {
+    "Word": "games",
+    "Frequency": 21
+  },
+  {
+    "Word": "also",
+    "Frequency": 20
+  },
+  {
+    "Word": "performance",
+    "Frequency": 20
+  },
+  {
+    "Word": "motherboard",
+    "Frequency": 20
+  }
+]
