@@ -2,341 +2,341 @@
   {
     "bigrams": [
       [
-        "anyone",
-        "else"
+        "50",
+        "series"
+      ],
+      29
+    ],
+    "trigrams": [
+      [
+        "rtx",
+        "50",
+        "series"
+      ],
+      17
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "5060",
+        "ti"
+      ],
+      23
+    ],
+    "trigrams": [
+      [
+        "inflation",
+        "cost",
+        "2018"
+      ],
+      10
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "5070",
+        "ti"
+      ],
+      19
+    ],
+    "trigrams": [
+      [
+        "rtx",
+        "5060",
+        "ti"
+      ],
+      9
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "frame",
+        "generation"
+      ],
+      18
+    ],
+    "trigrams": [
+      [
+        "nvidia",
+        "control",
+        "panel"
+      ],
+      6
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "rtx",
+        "50"
+      ],
+      17
+    ],
+    "trigrams": [
+      [
+        "rtx",
+        "5070",
+        "ti"
+      ],
+      6
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "geforce",
+        "rtx"
+      ],
+      16
+    ],
+    "trigrams": [
+      [
+        "5060",
+        "ti",
+        "16gb"
+      ],
+      5
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "frame",
+        "gen"
+      ],
+      15
+    ],
+    "trigrams": [
+      [
+        "studio",
+        "driver",
+        "57602"
+      ],
+      4
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "rtx",
+        "5090"
+      ],
+      12
+    ],
+    "trigrams": [
+      [
+        "game",
+        "ready",
+        "driver"
+      ],
+      4
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "steel",
+        "nomad"
+      ],
+      12
+    ],
+    "trigrams": [
+      [
+        "geforce",
+        "rtx",
+        "5060"
+      ],
+      4
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "best",
+        "buy"
+      ],
+      12
+    ],
+    "trigrams": [
+      [
+        "gigabyte",
+        "gaming",
+        "oc"
+      ],
+      4
+    ]
+  },
+  {
+    "bigrams": [
+      [
+        "4070",
+        "ti"
+      ],
+      11
+    ],
+    "trigrams": [
+      [
+        "black",
+        "myth",
+        "wukong"
       ],
       3
-    ],
-    "trigrams": [
-      [
-        "like",
-        "facebook",
-        "groups"
-      ],
-      2
     ]
   },
   {
     "bigrams": [
       [
-        "facebook",
-        "without"
+        "driver",
+        "57602"
       ],
-      2
+      10
     ],
     "trigrams": [
       [
-        "take",
-        "screenshot",
-        "report"
+        "tech",
+        "support",
+        "posts"
       ],
-      2
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "like",
-        "facebook"
+        "unreal",
+        "engine"
       ],
-      2
+      10
     ],
     "trigrams": [
       [
-        "true",
-        "hardly",
-        "anyone"
+        "would",
+        "love",
+        "hear"
       ],
-      1
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "facebook",
-        "groups"
+        "rtx",
+        "5070"
       ],
-      2
+      10
     ],
     "trigrams": [
       [
-        "hardly",
-        "anyone",
-        "uses"
+        "single",
+        "player",
+        "games"
       ],
-      1
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "dont",
-        "want"
+        "rtx",
+        "4060"
       ],
-      2
+      10
     ],
     "trigrams": [
       [
-        "anyone",
-        "uses",
-        "facebook"
+        "350",
+        "core",
+        "1500"
       ],
-      1
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "timeline",
-        "also"
+        "launch",
+        "price"
       ],
-      2
+      10
     ],
     "trigrams": [
       [
-        "uses",
-        "facebook",
-        "anymore"
+        "steel",
+        "nomad",
+        "undervolt"
       ],
-      1
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "whats",
-        "going"
+        "inflation",
+        "cost"
       ],
-      2
+      10
     ],
     "trigrams": [
       [
-        "facebook",
-        "anymore",
-        "becoming"
+        "msi",
+        "gaming",
+        "trio"
       ],
-      1
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "instagram",
-        "account"
+        "cost",
+        "2018"
       ],
-      2
+      10
     ],
     "trigrams": [
       [
-        "anymore",
-        "becoming",
-        "relic"
+        "core",
+        "2000",
+        "memory"
       ],
-      1
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "account",
-        "facebook"
+        "rtx",
+        "5060"
       ],
-      2
+      9
     ],
     "trigrams": [
       [
-        "becoming",
-        "relic",
-        "found"
+        "tb",
+        "m22280",
+        "pcie"
       ],
-      1
+      3
     ]
   },
   {
     "bigrams": [
       [
-        "years",
-        "old"
+        "tech",
+        "support"
       ],
-      2
+      9
     ],
     "trigrams": [
       [
-        "relic",
-        "found",
-        "customize"
+        "m22280",
+        "pcie",
+        "40"
       ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "every",
-        "time"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "found",
-        "customize",
-        "see"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "updated",
-        "apps"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "customize",
-        "see",
-        "facebook"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "facebook",
-        "page"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "see",
-        "facebook",
-        "without"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "hateful",
-        "content"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "facebook",
-        "without",
-        "extra"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "dont",
-        "even"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "without",
-        "extra",
-        "crap"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "fake",
-        "account"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "extra",
-        "crap",
-        "perfect"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "right",
-        "wing"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "crap",
-        "perfect",
-        "go"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "keeps",
-        "posting"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "perfect",
-        "go",
-        "settings"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "pictures",
-        "baby"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "go",
-        "settings",
-        "click"
-      ],
-      1
-    ]
-  },
-  {
-    "bigrams": [
-      [
-        "democrat",
-        "hashtags"
-      ],
-      2
-    ],
-    "trigrams": [
-      [
-        "settings",
-        "click",
-        "feeds"
-      ],
-      1
+      3
     ]
   }
 ]

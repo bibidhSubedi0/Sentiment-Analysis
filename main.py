@@ -9,7 +9,7 @@ def main():
                             user_agent=config["USER_AGENT"], get_comments=False)
     logging.info("Starting scraping...")
     processed = False
-    data, filename = scraper.collect_posts("facebook", 100, processed=processed)
+    data, filename = scraper.collect_posts("nvidia", 100, processed=processed)
 
     # find count of posts
     count = 0

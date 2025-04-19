@@ -1,82 +1,82 @@
 [
   {
-    "Word": "facebook",
-    "Frequency": 25
+    "Word": "rtx",
+    "Frequency": 116
   },
   {
-    "Word": "posts",
-    "Frequency": 9
-  },
-  {
-    "Word": "im",
-    "Frequency": 9
-  },
-  {
-    "Word": "help",
-    "Frequency": 9
-  },
-  {
-    "Word": "anyone",
-    "Frequency": 8
-  },
-  {
-    "Word": "dont",
-    "Frequency": 8
-  },
-  {
-    "Word": "people",
-    "Frequency": 7
-  },
-  {
-    "Word": "account",
-    "Frequency": 7
-  },
-  {
-    "Word": "friends",
-    "Frequency": 6
-  },
-  {
-    "Word": "like",
-    "Frequency": 6
-  },
-  {
-    "Word": "would",
-    "Frequency": 6
-  },
-  {
-    "Word": "even",
-    "Frequency": 6
-  },
-  {
-    "Word": "see",
-    "Frequency": 5
-  },
-  {
-    "Word": "pages",
-    "Frequency": 5
-  },
-  {
-    "Word": "hide",
-    "Frequency": 5
-  },
-  {
-    "Word": "content",
-    "Frequency": 5
-  },
-  {
-    "Word": "want",
-    "Frequency": 5
-  },
-  {
-    "Word": "also",
-    "Frequency": 5
-  },
-  {
-    "Word": "person",
-    "Frequency": 5
+    "Word": "gpu",
+    "Frequency": 107
   },
   {
     "Word": "get",
-    "Frequency": 5
+    "Frequency": 85
+  },
+  {
+    "Word": "nvidia",
+    "Frequency": 80
+  },
+  {
+    "Word": "im",
+    "Frequency": 75
+  },
+  {
+    "Word": "card",
+    "Frequency": 74
+  },
+  {
+    "Word": "ti",
+    "Frequency": 73
+  },
+  {
+    "Word": "new",
+    "Frequency": 69
+  },
+  {
+    "Word": "like",
+    "Frequency": 67
+  },
+  {
+    "Word": "driver",
+    "Frequency": 64
+  },
+  {
+    "Word": "game",
+    "Frequency": 61
+  },
+  {
+    "Word": "performance",
+    "Frequency": 61
+  },
+  {
+    "Word": "power",
+    "Frequency": 58
+  },
+  {
+    "Word": "5090",
+    "Frequency": 58
+  },
+  {
+    "Word": "one",
+    "Frequency": 54
+  },
+  {
+    "Word": "cards",
+    "Frequency": 52
+  },
+  {
+    "Word": "frame",
+    "Frequency": 51
+  },
+  {
+    "Word": "would",
+    "Frequency": 51
+  },
+  {
+    "Word": "got",
+    "Frequency": 49
+  },
+  {
+    "Word": "even",
+    "Frequency": 48
   }
 ]
