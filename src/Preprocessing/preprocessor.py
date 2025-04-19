@@ -96,8 +96,10 @@ def create_preprocessed_json_by_blocks_of_days(file_path):
     # print(date_set, len(date_set))
 
     # Save the preprocessed data
-    processed_dir = f'data/processed/{filename}_preprocessed'
+    processed_dir = f'data/processed/'
     os.makedirs(processed_dir, exist_ok=True)
-    with open(os.path.join(processed_dir, 'posts_by_blocks_of_days.json'), 'w') as f:
+    processed_filepath = os.path.join(processed_dir, f'{filename}.json')
+    with open(processed_filepath, 'w') as f:
         json.dump(posts_by_blocks_of_days, f, indent=2)
+    return processed_filepath
 
