@@ -46,7 +46,13 @@ class RedditScraper:
 
         logger.debug("Filtering posts newer than %s (UTC)", start_date.isoformat())
 
-        sort_methods = ['hot', 'new', 'top', 'rising', 'controversial']
+        sort_methods = [
+                        # 'hot',
+                        # 'new',
+                        'top',
+                        # 'rising',
+                        'controversial'
+                        ]
         total_processed = 0
         total_duplicates = 0
         total_expired = 0
@@ -112,19 +118,28 @@ class RedditScraper:
 
         try:
             subreddit = self.reddit.subreddit(subreddit_name)
-            method = getattr(subreddit, sort_method, None)
+            # method = getattr(subreddit, sort_method, None)
+            #
+            # if not method:
+            #     logger.warning("Invalid sort method '%s' for subreddit %s",
+            #                    sort_method, subreddit_name)
+            #     return []
+            #
+            # params = {'limit': limit}
+            # if time_filter and hasattr(method, 'time_filter'):
+            #     params['time_filter'] = time_filter
+            if sort_method == 'top':
+                posts = list(subreddit.top(time_filter=time_filter, limit=limit))
+            elif sort_method == 'controversial':
+                posts = list(subreddit.controversial(time_filter=time_filter, limit=limit))
+            elif sort_method == 'hot':
+                posts = list(subreddit.hot(limit=limit))
+            elif sort_method == 'new':
+                posts = list(subreddit.new(limit=limit))
+            else:
+                raise Exception(f"Invalid sort method: {sort_method}")
 
-            if not method:
-                logger.warning("Invalid sort method '%s' for subreddit %s",
-                               sort_method, subreddit_name)
-                return []
-
-            params = {'limit': limit}
-            if time_filter and hasattr(method, 'time_filter'):
-                params['time_filter'] = time_filter
-
-            logger.debug("Executing API request with params: %s", params)
-            posts = list(method(**params))
+            # logger.debug("Executing API request with params: %s", params)
             logger.debug("Received %d raw posts", len(posts))
 
             return [self._transform_post(p) for p in posts]
