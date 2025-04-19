@@ -49,18 +49,20 @@ def create_preprocessed_json_by_blocks_of_days(file_path):
         time_part = dt.time().isoformat()
         day_part = dt.day
         month_part = dt.month
-        
+
         date_set.add(date_part)
 
         day_of_year = month_part * 31 + day_part
         if current_day == -1:
             current_day = day_of_year
         
-        if day_of_year > current_day + 3:
+        if day_of_year > current_day + 2:
             current_day = day_of_year
             posts_by_blocks_of_days.append(block_list)
             block_list = []
-        print (f"Current day: {current_day}, Post day: {day_part}, Block list length: {len(block_list)}")
+
+        # print (f"Current day: {current_day}, Post day: {day_part}, Block list length: {len(block_list)}")
+
         post_data = {
             'post_id': post['post_id'],
             # 'author': post['author'],
@@ -94,7 +96,7 @@ def create_preprocessed_json_by_blocks_of_days(file_path):
     # print(date_set, len(date_set))
 
     # Save the preprocessed data
-    processed_dir = f'../../data/processed/{filename}_preprocessed'
+    processed_dir = f'data/processed/{filename}_preprocessed'
     os.makedirs(processed_dir, exist_ok=True)
     with open(os.path.join(processed_dir, 'posts_by_blocks_of_days.json'), 'w') as f:
         json.dump(posts_by_blocks_of_days, f, indent=2)
