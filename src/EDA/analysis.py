@@ -250,7 +250,7 @@ def CompleteAnalysis(file_path):
 
     exportDF = pd.DataFrame()
     exportDF['date'] = grouped['date'].first().values        # Date of first post in the block
-    exportDF['company'] = 'Facebook'                          
+    exportDF['company'] = get_filename(file_path)
     exportDF['avg_sentiment'] = grouped['Sentiment'].mean().values
     exportDF['num_comments'] = grouped['num_comments'].sum().values
     exportDF['num_posts'] = grouped.size().values             # Number of rows in each group

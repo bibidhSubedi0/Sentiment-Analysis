@@ -22,9 +22,10 @@ def main():
     name_subreddit = [
         "facebook",
         "nvidia",
-        "teslamotors",
+        # "teslamotors",
         "Amd",
-        "spacex",]
+        # "spacex"
+    ]
     # Collect posts from various subreddits
 
     try:
