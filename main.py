@@ -17,12 +17,23 @@ def main():
     start_time = time.time()
     logging.info("Starting scraping...")
 
+    # Collect posts from various subreddits
+    name_subreddit = [
+        "facebook",
+        "nvidia",
+        "teslamotors",
+        "Amd",
+        "spacex",]
+    # Collect posts from various subreddits
+
     try:
-        data_facebook, filename_facebook = scraper.collect_posts("facebook", 100)
-        data_nvidia, filename_nvidia = scraper.collect_posts("nvidia", 100)
-        data_tesla, filename_tesla = scraper.collect_posts("teslamotors", 100)
-        data_Amd, filename_Amd = scraper.collect_posts("Amd", 100)
-        data_spacex, filename_spacex = scraper.collect_posts("spacex", 100)
+
+        data = [scraper.collect_posts(subreddit, 100) for subreddit in name_subreddit]
+        # data_facebook, filename_facebook = scraper.collect_posts("facebook", 100)
+        # data_nvidia, filename_nvidia = scraper.collect_posts("nvidia", 100)
+        # data_tesla, filename_tesla = scraper.collect_posts("teslamotors", 100)
+        # data_Amd, filename_Amd = scraper.collect_posts("Amd", 100)
+        # data_spacex, filename_spacex = scraper.collect_posts("spacex", 100)
 
     finally:
         total_time = time.time() - start_time
@@ -34,7 +45,9 @@ def main():
         )
 
     # Preprocess the data
-    # preprocessor.create_preprocessed_json_by_blocks_of_days()
+    for posts, filename in data:
+        logging.info(f"Preprocessing data from {filename}")
+        preprocessor.create_preprocessed_json_by_blocks_of_days(filename)
 
 
 
