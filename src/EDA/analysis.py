@@ -284,6 +284,9 @@ def CompleteAnalysis(file_path):
         json.dump(common_words_serializable.to_dict(orient='records'), f, indent=2)
 
 
+    return filepathbase
 
 
-CompleteAnalysis(file_path)
+
+if __name__ == '__main__':
+    CompleteAnalysis(file_path)

@@ -2,6 +2,7 @@ import logging
 import time
 from src.Preprocessing import preprocessor
 from src.Scraping.RedditScraper import RedditScraper
+from src.EDA import analysis
 from dotenv import dotenv_values  # type: ignore
 
 
@@ -49,6 +50,11 @@ def main():
         logging.info(f"Preprocessing data from {filename}")
         fp=preprocessor.create_preprocessed_json_by_blocks_of_days(filename)
         logging.info(f"Preprocessed data saved to {fp}")
+
+        nfp = analysis.CompleteAnalysis(fp)
+        logging.info(f"EDA Completed and save to {nfp}")
+
+    
 
 
 
