@@ -17,11 +17,11 @@ def main():
     logging.info("Starting scraping...")
 
     try:
-        # data_facebook, filename_facebook = scraper.collect_posts("facebook", 100)
-        # data_nvidia, filename_nvidia = scraper.collect_posts("nvidia", 100)
+        data_facebook, filename_facebook = scraper.collect_posts("facebook", 100)
+        data_nvidia, filename_nvidia = scraper.collect_posts("nvidia", 100)
         data_tesla, filename_tesla = scraper.collect_posts("teslamotors", 100)
-        # data_Amd, filename_Amd = scraper.collect_posts("Amd", 100)
-        # data_spacex, filename_spacex = scraper.collect_posts("spacex", 100)
+        data_Amd, filename_Amd = scraper.collect_posts("Amd", 100)
+        data_spacex, filename_spacex = scraper.collect_posts("spacex", 100)
 
     finally:
         total_time = time.time() - start_time
