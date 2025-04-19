@@ -1,0 +1,51 @@
+[
+  {
+    "date": "2025-03-20",
+    "company": "Facebook",
+    "avg_sentiment": -0.53586,
+    "num_comments": 783,
+    "num_posts": 5
+  },
+  {
+    "date": "2025-03-25",
+    "company": "Facebook",
+    "avg_sentiment": 0.03813999999999999,
+    "num_comments": 930,
+    "num_posts": 5
+  },
+  {
+    "date": "2025-03-30",
+    "company": "Facebook",
+    "avg_sentiment": 0.03262,
+    "num_comments": 1004,
+    "num_posts": 5
+  },
+  {
+    "date": "2025-04-03",
+    "company": "Facebook",
+    "avg_sentiment": -0.18530000000000002,
+    "num_comments": 499,
+    "num_posts": 6
+  },
+  {
+    "date": "2025-04-07",
+    "company": "Facebook",
+    "avg_sentiment": -0.174,
+    "num_comments": 424,
+    "num_posts": 7
+  },
+  {
+    "date": "2025-04-11",
+    "company": "Facebook",
+    "avg_sentiment": -0.2308,
+    "num_comments": 313,
+    "num_posts": 3
+  },
+  {
+    "date": "2025-04-15",
+    "company": "Facebook",
+    "avg_sentiment": 0.04543255813953488,
+    "num_comments": 1522,
+    "num_posts": 172
+  }
+]
