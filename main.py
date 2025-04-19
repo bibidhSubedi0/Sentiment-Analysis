@@ -47,7 +47,8 @@ def main():
     # Preprocess the data
     for posts, filename in data:
         logging.info(f"Preprocessing data from {filename}")
-        preprocessor.create_preprocessed_json_by_blocks_of_days(filename)
+        fp=preprocessor.create_preprocessed_json_by_blocks_of_days(filename)
+        logging.info(f"Preprocessed data saved to {fp}")
 
 
 

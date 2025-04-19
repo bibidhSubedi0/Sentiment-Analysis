@@ -11,3 +11,4 @@ venv/
 
 data/raw/*
 src/EDA/corpora
+data/processed/*
