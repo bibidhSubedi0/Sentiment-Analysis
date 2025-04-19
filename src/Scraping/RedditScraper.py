@@ -1,25 +1,27 @@
-import os
-import re
-
-import praw
 import json
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import sys
-from collections import defaultdict
+from typing import Tuple, List, Dict
+import os
+import time
+
+import praw
 
 logging.basicConfig(
-    # level=logging.DEBUG,  # Set to DEBUG for verbose logging
-    level=logging.INFO,  # Set to INFO for verbose logging
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    level=logging.INFO,
+    # format='%(asctime)s - %(levelname)s - %(message)s',
+    format='%(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('reddit_scraper.log')
+        # logging.FileHandler('reddit_scraper.log')
     ]
 )
+logger = logging.getLogger(__name__)
+
 
 class RedditScraper:
-    def __init__(self, client_id, client_secret, user_agent, get_comments = False):
+    def __init__(self, client_id: str, client_secret: str, user_agent: str, get_comments: bool = False):
         self.reddit = praw.Reddit(
             client_id=client_id,
             client_secret=client_secret,
@@ -27,139 +29,187 @@ class RedditScraper:
             check_for_async=False
         )
         self.get_comments = get_comments
-        self.flair_list = []
-        logging.info("RedditScraper initialized successfully")
+        logger.debug(
+            "Initializing RedditScraper with client ID: %s...%s, User-Agent: %s, Comments enabled: %s",
+            client_id[:2], client_id[-2:],  # Obscure full client ID in logs
+            user_agent,
+            get_comments
+        )
 
-    def collect_posts(self, subreddit_name: str, count: int, processed: bool = False):
-        collected_data = defaultdict(lambda: {"posts": []})
-        seen_posts = set()
+    def collect_posts(self, subreddit_name: str, count: int) -> Tuple[List[Dict], str]:
+        """Collect recent posts from a subreddit with deduplication"""
+        logger.info("🚀 Starting collection for r/%s (target: %d posts)", subreddit_name, count)
+        start_time = time.time()
+        collected_posts = []
+        seen_ids = set()
+        start_date = datetime.now(timezone.utc) - timedelta(days=30)
 
-        logging.info(f"Starting to collect posts from r/{subreddit_name}")
+        logger.debug("Filtering posts newer than %s (UTC)", start_date.isoformat())
 
-        for sort_method in ['hot', 'new', 'top', 'rising', 'controversial']:
+        sort_methods = ['hot', 'new', 'top', 'rising', 'controversial']
+        total_processed = 0
+        total_duplicates = 0
+        total_expired = 0
+
+        for sort_method in sort_methods:
             try:
-                logging.info(f"Fetching {count} posts with sort method: {sort_method}")
-                posts = self._fetch_batch(subreddit_name, sort_method, count, processed)
+                batch_start = time.time()
+                logger.info("🔍 Processing '%s' sort method...", sort_method)
+
+                time_filter = 'month' if sort_method in ('top', 'controversial') else None
+                posts = self._fetch_batch(subreddit_name, sort_method, count * 2, time_filter)
+
+                logger.debug("Retrieved %d posts from '%s' method", len(posts), sort_method)
+                batch_duplicates = 0
+                batch_expired = 0
 
                 for post in posts:
-                    if post['post_id'] not in seen_posts:
-                        seen_posts.add(post['post_id'])
-                        month_key = datetime.fromisoformat(post['created_utc']).strftime('%Y-%m')
-                        collected_data[month_key]['posts'].append(post)
+                    total_processed += 1
+                    post_date = datetime.fromisoformat(post['created_utc'])
+
+                    if post_date < start_date:
+                        batch_expired += 1
+                        logger.debug("Skipping expired post ID %s (created: %s)",
+                                     post['post_id'], post_date.isoformat())
+                        continue
+
+                    if post['post_id'] in seen_ids:
+                        batch_duplicates += 1
+                        logger.debug("Duplicate post ID %s found", post['post_id'])
+                        continue
+
+                    seen_ids.add(post['post_id'])
+                    collected_posts.append(post)
+                    logger.debug("✅ Added post ID %s (Score: %d, Comments: %d)",
+                                 post['post_id'], post['score'], post['num_comments'])
+
+                total_duplicates += batch_duplicates
+                total_expired += batch_expired
+                logger.info((
+                    "🏁 Batch complete: %d new, %d duplicates, %d expired "
+                    "(%.2fs) | Total: %d"
+                ), len(posts) - batch_duplicates - batch_expired,
+                    batch_duplicates, batch_expired,
+                   time.time() - batch_start, len(collected_posts))
 
             except Exception as e:
-                logging.error(f"Failed {sort_method}: {str(e)}")
-        output = self._format_output(collected_data, processed)
-        filename = self.save_data(output, subreddit_name, processed)
-        return output , filename
+                logger.error("❌ Failed %s method: %s", sort_method, str(e), exc_info=True)
+                continue
 
+        logger.info((
+            "📊 Collection complete for r/%s\n"
+            "Total processed: %d | Valid: %d | Duplicates: %d | Expired: %d\n"
+            "Elapsed time: %.2fs"
+        ), subreddit_name, total_processed, len(collected_posts),
+            total_duplicates, total_expired, time.time() - start_time)
 
+        return self._format_flattened(collected_posts, subreddit_name)
 
-    def _fetch_batch(self, subreddit_name: str, sort_method: str, limit: int, processed: bool = False):
-        subreddit = self.reddit.subreddit(subreddit_name)
-        method = getattr(subreddit, sort_method, None)
-        if method is None:
-            logging.error(f"Invalid sort method: {sort_method}")
-            return []
+    def _fetch_batch(self, subreddit_name: str, sort_method: str, limit: int, time_filter: str = None) -> List[Dict]:
+        """Fetch a batch of posts using specified sorting method"""
+        logger.debug("Fetching batch: sub=%s, sort=%s, limit=%d, time_filter=%s",
+                     subreddit_name, sort_method, limit, time_filter)
+
         try:
-            posts = list(method(limit=limit))
-        except Exception as e:
-            logging.error(f"Error fetching posts: {str(e)}")
+            subreddit = self.reddit.subreddit(subreddit_name)
+            method = getattr(subreddit, sort_method, None)
+
+            if not method:
+                logger.warning("Invalid sort method '%s' for subreddit %s",
+                               sort_method, subreddit_name)
+                return []
+
+            params = {'limit': limit}
+            if time_filter and hasattr(method, 'time_filter'):
+                params['time_filter'] = time_filter
+
+            logger.debug("Executing API request with params: %s", params)
+            posts = list(method(**params))
+            logger.debug("Received %d raw posts", len(posts))
+
+            return [self._transform_post(p) for p in posts]
+
+        except praw.exceptions.APIException as api_error:
+            logger.error("API Error: %s (HTTP %d)", api_error.message, api_error.error_type)
             return []
-        logging.info(f"Fetched {len(posts)} posts from r/{subreddit_name}")
-        return [self.__process_post(p) for p in posts] if processed else [self._transform_post(p) for p in posts]
+        except Exception as e:
+            logger.error("Unexpected error in batch fetch: %s", str(e), exc_info=True)
+            return []
 
+    def _format_flattened(self, posts: List[Dict], subreddit_name: str) -> Tuple[List[Dict], str]:
+        """Format and save posts to JSON file"""
+        flattened = [{
+            "title": p['title'],
+            "author": p['author'],
+            "created_utc": p['created_utc'],
+            "score": p['score'],
+            "num_comments": p['num_comments'],
+            "awards": p['awards'],
+            "body": p['body'],
+            "url": p['url'],
+            "flair": p['flair'],
+            "post_id": p['post_id'],
+            "permalink": p['permalink'],
+            "comments": p['comments']
+        } for p in posts]
 
-    def __process_post(self, post):
-        # logging.debug(f"Processing post {post.id}")
-        return {
-            'post_id': post.id,
-            'created_utc': datetime.fromtimestamp(post.created_utc).isoformat(),
+        filename = f"data/raw/{subreddit_name}.json"
+        logging.debug(f"Saving to {filename}")
+        try:
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
+            with open(filename, "w", encoding="utf-8") as f:
+                json.dump(flattened, f, indent=2, ensure_ascii=False)
+        except IOError as e:
+            logging.error(f"Failed to save data: {str(e)}", exc_info=True)
+            raise
 
-            'title': post.title,
-            'score': post.score,
-            'body': post.selftext,
-            'num_comments': post.num_comments,
-            'flair': post.link_flair_text,
-            'nsfw': post.over_18,
-            'awards': post.total_awards_received,
-            'created_hour': datetime.fromtimestamp(post.created_utc).hour,
-            'created_dayofweek': datetime.fromtimestamp(post.created_utc).weekday(),
-            'combined_text': f"{post.title} {post.selftext}",
-            'cleaned_text': re.sub(r'\W+', ' ', re.sub(r'http\S+', '', f"{post.title} {post.selftext}".lower())),
-            'flair_encoded': self._encode_flair(post.link_flair_text),
-        }
+        return flattened, filename
 
-    def _transform_post(self, post) -> dict:
-        # logging.debug(f"Transforming post {post.id}")
-        return {
-            'title': post.title,
-            'author': str(post.author),
-            'created_utc': datetime.fromtimestamp(post.created_utc).isoformat(),
-            'score': post.score,
-            'num_comments': post.num_comments,
-            'awards': post.total_awards_received,
-            'body': post.selftext,
-            'url': post.url,
-            'flair': post.link_flair_text,
-            'post_id': post.id,
-            'permalink': f"https://www.reddit.com{post.permalink}",
-            'comments': self._fetch_top_comments(post.id) if self.get_comments else [],
-        }
+    def _transform_post(self, post: praw.models.Submission) -> Dict:
+        """Transform PRAW submission object to dictionary"""
+        logger.debug("Transforming post ID %s", post.id)
+        try:
+            return {
+                'title': post.title,
+                'author': str(post.author) if post.author else '[deleted]',
+                'created_utc': datetime.fromtimestamp(post.created_utc, tz=timezone.utc).isoformat(),
+                'score': post.score,
+                'num_comments': post.num_comments,
+                'awards': post.total_awards_received,
+                'body': post.selftext,
+                'url': post.url,
+                'flair': post.link_flair_text,
+                'post_id': post.id,
+                'permalink': f"https://www.reddit.com{post.permalink}",
+                'comments': self._fetch_top_comments(post.id) if self.get_comments else [],
+            }
+        except Exception as e:
+            logger.warning("Failed to transform post ID %s: %s", post.id, str(e))
+            return {}
 
-    def _encode_flair(self, flair_text: str) -> int:
-        if flair_text is None:
-            return 0
-        if flair_text not in self.flair_list:
-            self.flair_list.append(flair_text)
-        return self.flair_list.index(flair_text) + 1
-
-    def _fetch_top_comments(self, post_id: str, limit: int = 3):
+    def _fetch_top_comments(self, post_id: str, limit: int = 3) -> List[Dict]:
+        """Fetch top comments from a post"""
         logging.info(f"Fetching top {limit} comments for post {post_id}")
         submission = self.reddit.submission(id=post_id)
         submission.comment_sort = 'top'
-        submission.comment_limit = limit
-        top_comments = []
+        submission.comment_limit = limit * 2  # Fetch extra to account for removed comments
 
-        submission.comments.replace_more(limit=0)
-        for comment in submission.comments[:limit]:
-            top_comments.append({
-                'author': str(comment.author),
-                'body': comment.body,
-                'score': comment.score,
-                'created_utc': datetime.fromtimestamp(comment.created_utc).isoformat()
-            })
-
-        logging.info(f"Fetched {len(top_comments)} top comments for post {post_id}")
-        return top_comments
-
-    def _format_output(self, collected_data, processed=False):
-        if processed:
-            flattened = []
-            for month_data in collected_data.values():
-                for post in month_data['posts']:
-                    filtered_post = {k: v for k, v in post.items()
-                                    if k not in ['post_id', 'created_utc']}
-                    flattened.append(filtered_post)
-            return flattened
-        else:
-            output = []
-            for month, data in collected_data.items():
-                output.append({
-                    'month': month,
-                    'num_posts': len(data['posts']),
-                    'posts': data['posts']
+        comments = []
+        try:
+            submission.comments.replace_more(limit=0)
+            valid_comments = [c for c in submission.comments if not c.body == '[removed]']
+            for comment in valid_comments[:limit]:
+                comments.append({
+                    'author': str(comment.author) if comment.author else '[deleted]',
+                    'body': comment.body,
+                    'score': comment.score,
+                    'created_utc': datetime.utcfromtimestamp(comment.created_utc).isoformat() + 'Z'
                 })
-            return sorted(output, key=lambda x: x['month'], reverse=True)
+        except Exception as e:
+            logging.error(f"Failed to fetch comments: {str(e)}", exc_info=True)
 
-    def save_data(self, data, subreddit_name, processed: bool = False):
-        dir_path = f"data/{'processed' if processed else 'raw'}"
-        os.makedirs(dir_path, exist_ok=True)
-        filename = f"{dir_path}/{subreddit_name}_grouped.json"
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
-        logging.info(f"Saved grouped data to {filename}")
-        return filename
+        logging.info(f"Fetched {len(comments)} top comments for post {post_id}")
+        return comments
 
     def __del__(self):
-        logging.info("RedditScraper instance destroyed")
+        logging.debug("RedditScraper instance destroyed")
