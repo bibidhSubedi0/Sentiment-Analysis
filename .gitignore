@@ -8,6 +8,7 @@ venv/
 *.pyo
 *.pyd
 *.log
+*.json
 
 data/raw/*
 src/EDA/corpora
