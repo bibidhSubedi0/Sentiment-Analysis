@@ -14,7 +14,7 @@ logging.basicConfig(
     format='%(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('reddit_scraper.log')
+        # logging.FileHandler('reddit_scraper.log')
     ]
 )
 logger = logging.getLogger(__name__)
@@ -152,6 +152,9 @@ class RedditScraper:
             "permalink": p['permalink'],
             "comments": p['comments']
         } for p in posts]
+
+
+        flattened.sort(key= lambda p: p['created_utc'], reverse=False)
 
         filename = f"data/raw/{subreddit_name}.json"
         logging.debug(f"Saving to {filename}")
