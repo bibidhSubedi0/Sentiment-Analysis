@@ -71,8 +71,8 @@ def CompleteAnalysis(file_path):
     plt.xlabel("Date")
     plt.ylabel("Score")
     plt.legend()
-    plt.grid(True)
-    plt.xticks(rotation=45)
+    plt.grid(False)
+    plt.xticks(rotation=0)
     plt.tight_layout()
     plt.savefig(f'{filepathbase}RollingScore.png')
 
@@ -161,7 +161,7 @@ def CompleteAnalysis(file_path):
     plt.title('Sentiment vs Post Length')
     plt.xlabel('Post Length (characters)')
     plt.ylabel('Sentiment')
-    plt.grid(True)
+    plt.grid(False)
     plt.tight_layout()
     plt.savefig(f'{filepathbase}SentVlen.png')
 
@@ -171,7 +171,7 @@ def CompleteAnalysis(file_path):
     plt.title('Sentiment vs Time of Day')
     plt.xlabel('Hour')
     plt.ylabel('Sentiment')
-    plt.grid(True)
+    plt.grid(False)
     plt.tight_layout()
     plt.savefig(f'{filepathbase}SentVTime.png')
 
@@ -181,7 +181,7 @@ def CompleteAnalysis(file_path):
     plt.title('Sentiment vs Popularity (Score + Comments)')
     plt.xlabel('Popularity')
     plt.ylabel('Sentiment')
-    plt.grid(True)
+    plt.grid(False)
     plt.tight_layout()
     plt.savefig(f'{filepathbase}SentVPop.png')
 
