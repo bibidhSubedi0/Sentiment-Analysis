@@ -1,5 +1,6 @@
 import logging
 import time
+from src.Preprocessing import preprocessor
 from src.Scraping.RedditScraper import RedditScraper
 from dotenv import dotenv_values  # type: ignore
 
@@ -31,6 +32,9 @@ def main():
         logging.info(
             f"Total scraping time: {int(hours)}h {int(minutes)}m {seconds:.2f}s"
         )
+
+    # Preprocess the data
+    # preprocessor.create_preprocessed_json_by_blocks_of_days()
 
 
 
