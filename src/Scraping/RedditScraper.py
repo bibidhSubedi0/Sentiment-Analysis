@@ -153,6 +153,9 @@ class RedditScraper:
             "comments": p['comments']
         } for p in posts]
 
+
+        flattened.sort(key= lambda p: p['created_utc'], reverse=False)
+
         filename = f"data/raw/{subreddit_name}.json"
         logging.debug(f"Saving to {filename}")
         try:
